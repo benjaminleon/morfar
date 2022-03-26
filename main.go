@@ -51,7 +51,7 @@ func (s *Service) httpPUTActivityState(c *gin.Context) {
 	}
 	// Remove some messages when there are too many
 	maxLettersPerRow := 44
-	maxNrRows := 5
+	maxNrRows := 15
 	for {
 		nrWrappedLines := len(s.txt) / maxLettersPerRow
 		nrNewLines := strings.Count(s.txt, "\n")
@@ -68,6 +68,15 @@ func (s *Service) httpPUTActivityState(c *gin.Context) {
 			s.txt = s.txt[idx+1:]
 		} else {
 			s.txt = s.txt[idx:]
+		}
+
+		// Remove new line from beginning of string
+		for {
+			if strings.HasPrefix(s.txt, "\n") {
+				s.txt = s.txt[1:]
+			} else {
+				break
+			}
 		}
 	}
 

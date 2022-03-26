@@ -12,7 +12,7 @@ textw.config(background='light grey', foreground='black', font='arial 20 bold', 
 
 
 def show_msg():
-    txt = requests.get('http://127.0.0.1:13001/').text
+    txt = requests.get('http://192.236.179.92:13001/').text
     textw.delete('1.0', 'end')
     textw.insert('end', txt)
     root.after(2000, lambda: show_msg())

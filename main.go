@@ -49,6 +49,10 @@ func (s *Service) httpPUTActivityState(c *gin.Context) {
 		c.String(http.StatusBadRequest, "Missing either 's' query parameter. E.g. send a PUT request with Postman to 127.0.0.1:13001/?s=hejsan")
 		return
 	}
+
+	s.txt += fmt.Sprintf("\n\n %s", time.Now().Format("02 January 03:04"))
+	s.txt += fmt.Sprintf("%s", message)
+
 	// Remove some messages when there are too many
 	maxLettersPerRow := 44
 	maxNrRows := 15
@@ -79,8 +83,6 @@ func (s *Service) httpPUTActivityState(c *gin.Context) {
 			}
 		}
 	}
-
-	s.txt += fmt.Sprintf("\n\n%s", message)
 
 	c.Status(http.StatusOK)
 }

@@ -50,7 +50,7 @@ func (s *Service) httpPUTActivityState(c *gin.Context) {
 		return
 	}
 
-	s.txt += fmt.Sprintf("\n\n %s", time.Now().Format("02 January 03:04"))
+	s.txt += fmt.Sprintf("\n\n%s ", time.Now().Format("02 January 03:04"))
 	s.txt += fmt.Sprintf("%s", message)
 
 	// Remove some messages when there are too many

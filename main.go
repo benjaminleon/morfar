@@ -49,19 +49,19 @@ func (s *Service) httpPUTActivityState(c *gin.Context) {
 		c.String(http.StatusBadRequest, "Missing either 's' query parameter. E.g. send a PUT request with Postman to 127.0.0.1:13001/?s=hejsan")
 		return
 	}
-
+	maxLength := 50
 	// Remove some messages when there are too many
 	for {
 		fmt.Println("length of txt is ", len(s.txt))
-		if len(s.txt) < 50 {
+		if len(s.txt) < maxLength {
 			break
 		}
 		fmt.Println(s.txt)
 		idx := strings.Index(s.txt, "\n")
-		fmt.Println("idx", idx)
-		if idx != -1 {
+		if idx == -1 { // Just a single long line
+			s.txt = s.txt[maxLength:]
+		} else {
 			s.txt = s.txt[idx+1:]
-			fmt.Println("New length of txt is ", len(s.txt))
 		}
 	}
 
